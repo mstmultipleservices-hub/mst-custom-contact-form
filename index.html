@@ -11,7 +11,7 @@
 .shell{max-width:1180px;margin:0 auto;padding:48px 20px}
 .card{display:grid;grid-template-columns:.9fr 1.1fr;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 22px 60px rgba(0,0,0,.22);border:1px solid rgba(199,164,71,.25)}
 .brand{background:var(--black);color:#fff;padding:48px;display:flex;flex-direction:column;justify-content:space-between;min-height:720px}
-.logo{display:flex;align-items:center;gap:14px}.mark{font-family:Georgia,serif;font-size:46px;font-weight:700;letter-spacing:-3px;color:#fff}.mark span{color:var(--gold2)}.company{font-weight:700;letter-spacing:.08em;font-size:13px}.tag{color:var(--gold2);font-size:11px;letter-spacing:.12em;margin-top:5px}
+.logo{display:flex;align-items:center;gap:14px}.brand-logo{display:block;width:min(100%,420px);height:auto;object-fit:contain}.mark{font-family:Georgia,serif;font-size:46px;font-weight:700;letter-spacing:-3px;color:#fff}.mark span{color:var(--gold2)}.company{font-weight:700;letter-spacing:.08em;font-size:13px}.tag{color:var(--gold2);font-size:11px;letter-spacing:.12em;margin-top:5px}
 .brand h1{font-family:Georgia,serif;font-size:48px;line-height:1.05;margin:56px 0 18px}.gold{color:var(--gold2)}.intro{color:#d4d4d6;line-height:1.7;font-size:16px;max-width:510px}
 .info{border-top:1px solid #333;padding-top:24px;color:#ddd;line-height:1.8;font-size:14px}.info strong{color:#fff}.formbox{padding:48px}
 .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#8c6b1f;font-weight:700}.formbox h2{font-family:Georgia,serif;font-size:36px;margin:8px 0 10px}.sub{color:var(--muted);margin:0 0 30px;line-height:1.6}
@@ -28,7 +28,7 @@ input,select,textarea{width:100%;font:inherit;padding:14px 15px;border:1px solid
 <main class="card">
 <section class="brand">
 <div>
-<div class="logo"><div class="mark">M<span>S</span>T</div><div><div class="company">MULTIPLE SERVICES, LLC</div><div class="tag">FINANCIAL & BUSINESS SUPPORT</div></div></div>
+<div class="logo"><img id="mstLogo" class="brand-logo" alt="MST Multiple Services, LLC"></div>
 <h1>Your trusted <span class="gold">financial partner.</span></h1>
 <p class="intro">Tell us what you need and MST Multiple Services will follow up with you. We support truck drivers, small businesses, entrepreneurs, contractors, service businesses, and self-employed professionals throughout Georgia.</p>
 </div>
@@ -87,6 +87,24 @@ input,select,textarea{width:100%;font:inherit;padding:14px 15px;border:1px solid
 </main>
 <div class="footer">© 2026 MST Multiple Services, LLC. All rights reserved.</div>
 </div>
+
+<script>
+(async()=>{
+  const logo=document.getElementById('mstLogo');
+  if(!logo) return;
+  try{
+    const files=['assets/mst-logo.part1','assets/mst-logo.part2','assets/mst-logo.part3','assets/mst-logo.part4'];
+    const parts=await Promise.all(files.map(async file=>{
+      const r=await fetch(file,{cache:'force-cache'});
+      if(!r.ok) throw new Error('Logo asset unavailable');
+      return (await r.text()).trim();
+    }));
+    logo.src='data:image/webp;base64,'+parts.join('');
+  }catch(e){
+    logo.alt='MST Multiple Services, LLC';
+  }
+})();
+</script>
 
 <script>
 const form=document.getElementById('mstForm');
