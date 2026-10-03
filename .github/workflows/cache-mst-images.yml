@@ -1,0 +1,39 @@
+name: Cache MST Canva Images
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/cache-mst-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cache-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download website images
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p website/images
+          curl -L --fail --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:200/quality:100/uri:ifs%3A%2F%2FM%2F225498b4-84f5-41d4-afce-a797b441d647/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAANZuKNCOr4u5RK0KxEnf2yfYg5i8B4frN9EYcOftLKa2&exp=1791010621&osig=AAAAAAAAAAAAAAAAAAAAALe7noNwcI5C-HUTBkKV3_duH8N4MUkbW3MjSJCwxj1S&signer=media-rpc&token=AAIAAU0AJDIyNTQ5OGI0LTg0ZjUtNDFkNC1hZmNlLWE3OTdiNDQxZDY0NwAAAAABoQCNRkiaCsuDSW4pZlC0buVVKMNlLncR_Lh-8N7Nvr3RIxoe6Q&x-canva-quality=thumbnail' -o website/images/portrait.png
+          curl -L --fail --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:112/quality:100/uri:ifs%3A%2F%2FM%2Ff51dfc3d-e57c-4eb3-bb59-ae5740870351/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAH4J8JCFiFwxbb6eFCnAnATCTIPgqkFbNtguAL-O8USR&exp=1791010737&osig=AAAAAAAAAAAAAAAAAAAAAPB7vGnGl5V7nNNBmApqFikwQX4TeH1jJsbEbtu_oVkx&signer=media-rpc&token=AAIAAU0AJGY1MWRmYzNkLWU1N2MtNGViMy1iYjU5LWFlNTc0MDg3MDM1MQAAAAABoQCPC2hXJkUB4dIlgw2BAQG7f_4jWyEBM9_eTeDOwBKdQoJNEA&x-canva-quality=thumbnail' -o website/images/laptop.png
+          curl -L --fail --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:101/quality:100/uri:ifs%3A%2F%2FM%2F077a448e-d09d-4156-8634-f0564586f911/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAHxsyHs0Wl2nBjP62ORIZbDPTRDBsy7QhrlCKuvz6l-e&exp=1791010723&osig=AAAAAAAAAAAAAAAAAAAAACZ1RUjKg8w7D8oCoRBEzGhmSHP3kFVh6PJ5F0y7a_DN&signer=media-rpc&token=AAIAAU0AJDA3N2E0NDhlLWQwOWQtNDE1Ni04NjM0LWYwNTY0NTg2ZjkxMQAAAAABoQCO1LgiixtTD5ET5I60g2dYfhEs5pzUiGfGejr9xYneQgiXZw&x-canva-quality=thumbnail' -o website/images/stamp.png
+          curl -L --fail --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:100/quality:100/uri:ifs%3A%2F%2FM%2F3fc161e1-e2f2-4cc2-9c30-7c54d0c2431a/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAADE9jrIgI2G44eaekGOGrVnAxNsqlJgkrT3YUaohi2jP&exp=1791009834&osig=AAAAAAAAAAAAAAAAAAAAAAnIfbC6ZoQe4_OuWj7ILHbzx6OPSqDomUUTsU3_WaXV&signer=media-rpc&token=AAIAAU0AJDNmYzE2MWUxLWUyZjItNGNjMi05YzMwLTdjNTRkMGMyNDMxYQAAAAABoQCBRBCbd0ODcnoMFckCDzRhQK1LCyO1ELSbtKt-BkOyaDTuYQ&x-canva-quality=thumbnail' -o website/images/notebook.png
+          curl -L --fail --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:133/quality:100/uri:ifs%3A%2F%2FM%2F9eea273a-3058-4eee-99a3-c0c9d52f46fe/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAADca98aa7KpdyyRvdW7yKMJrUAWA_5Rrk9JxjVamey6G&exp=1791007856&osig=AAAAAAAAAAAAAAAAAAAAAApMsImUXMqkUXHIUF84Wc_ecWJAnxcqh6z2j4DujYpE&signer=media-rpc&token=AAIAAU0AJDllZWEyNzNhLTMwNTgtNGVlZS05OWEzLWMwYzlkNTJmNDZmZQAAAAABoQBjFYBD-DlV323dPyyDrdERI0h2fnk4ikVh6Q_ZHOIL84TQ6g&x-canva-quality=thumbnail' -o website/images/illustration.png
+          curl -L --fail --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:133/quality:100/uri:ifs%3A%2F%2FM%2Fac227a02-502e-4aa9-a3fb-6e65ee7cd054/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAOIgqazP-3jFmTzDcsL9UA9gsdOYCI1zivKBhhO8zyah&exp=1791009231&osig=AAAAAAAAAAAAAAAAAAAAALKj_P3OWLUPXKFFyRRV0y4M5cCz6SxzFvJyR7tTUNU6&signer=media-rpc&token=AAIAAU0AJGFjMjI3YTAyLTUwMmUtNGFhOS1hM2ZiLTZlNjVlZTdjZDA1NAAAAAABoQB4EJglolVHF-y0-HNF73qS74_tvaGXnSRq03f3K8aw12YUdw&x-canva-quality=thumbnail' -o website/images/business-support.png
+          curl -L --fail --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:200/quality:100/uri:ifs%3A%2F%2FM%2Fe7054c6d-cfb0-407b-b593-1f89d327faa4/watermark:F/width:166?csig=AAAAAAAAAAAAAAAAAAAAAFFnJ2xSOwD8u95WKdcsjjEqOPjo5An6oihhzgEZGoUd&exp=1791009606&osig=AAAAAAAAAAAAAAAAAAAAAFVcrmUAJJda5pcuLtGK8nYwvr7JyPALq8Pq6jLsKB3k&signer=media-rpc&token=AAIAAU0AJGU3MDU0YzZkLWNmYjAtNDA3Yi1iNTkzLTFmODlkMzI3ZmFhNAAAAAABoQB9yXATAfP0oAiQMQnq0hX1hjkRnYaR-I5gB0G-qSG4s0qfVg&x-canva-quality=thumbnail' -o website/images/handshake.png
+          curl -L --fail --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:112/quality:100/uri:ifs%3A%2F%2FM%2F8bd05a72-fdc4-4dfb-8a9c-dfdb0f5f0873/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAALINiQoPw2Ehw4MA4tUk7AtY2CfnlyHcR99yEsLYJwsc&exp=1791007429&osig=AAAAAAAAAAAAAAAAAAAAAK9rCB9niTONKi6ibbrQYZLQVnzxNkCs7Pm769Gk3849&signer=media-rpc&token=AAIAAU0AJDhiZDA1YTcyLWZkYzQtNGRmYi04YTljLWRmZGIwZjVmMDg3MwAAAAABoQBckYjhEAiOXZ2GePRc4Uq3K16eTpJknauzKscvq2iChjppmg&x-canva-quality=thumbnail' -o website/images/entrepreneur.png
+          curl -L --fail --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:133/quality:100/uri:ifs%3A%2F%2FM%2Fed7f4f9e-2aca-44ec-a1a4-27b77558346f/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAGB1xT9eOs7rPCDg_9jjasAktV_Rua4l7V9RrC0r1T3v&exp=1791007854&osig=AAAAAAAAAAAAAAAAAAAAAP2_TFJdxFN6dq67Tx6gZQJQFZr_DEHs_JIl6dK3W4Ny&signer=media-rpc&token=AAIAAU0AJGVkN2Y0ZjllLTJhY2EtNDRlYy1hMWE0LTI3Yjc3NTU4MzQ2ZgAAAAABoQBjDbBiRqrjZsRU0pYUbs9yq6bY3VKeTIgznhAQ5JQBSY8v7w&x-canva-quality=thumbnail' -o website/images/laptop-lettering.png
+          curl -L --fail --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:75/quality:100/uri:ifs%3A%2F%2FM%2F7d5f8dd3-3d9b-4b77-9440-e6d16c57d5c7/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAPmEOCV4rA4nSpyIKkh0BThKvHW0gU4w18HBvk0gZxNg&exp=1791008475&osig=AAAAAAAAAAAAAAAAAAAAALOdslHgovfgQhrweydszBWOWHUN9X4AUY4DkJxr1JGc&signer=media-rpc&token=AAIAAU0AJDdkNWY4ZGQzLTNkOWItNGI3Ny05NDQwLWU2ZDE2YzU3ZDVjNwAAAAABoQBsh3jWrRFeOoeFLHsytnKsCYrBrZ0zzMTFY_uTJxiQCbl7Sg&x-canva-quality=thumbnail' -o website/images/skyline.png
+      - name: Commit images
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add website/images
+          git diff --cached --quiet || git commit -m 'Add permanent MST website images'
+          git push
